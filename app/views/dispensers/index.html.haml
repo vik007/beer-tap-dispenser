@@ -1,0 +1,29 @@
+.container
+  %main
+    .d-flex.justify-content-between
+      %h1.h2 Dispenser
+      = link_to new_dispenser_path, { 'data-controller': 'turbo', 'data-toggle': "modal", 'data-target': '#remote_modal', class: 'btn btn btn-primary mt-4 me-2', title: 'Add / Edit Dispenser', 'data-toggle': "tooltip", 'data-placement': "bottom" } do
+        New
+    .table-responsive
+      %table.table.table-striped.table-sm
+        %thead
+          %tr
+            %th{:scope => "col"} #
+            %th{:scope => "col"} Flow Volume
+            %th{:scope => "col"} Duration
+            %th{:scope => "col"} Amount
+            %th{:scope => "col", style: 'min-width: 100px;'} Action
+        %tbody
+          - @dispensers.each do |dispenser|
+            %tr
+              %td= link_to dispenser.id, dispenser_path(dispenser)
+              %td= number_to_human(dispenser.flow_volume * 1000, units: {unit: "ml", thousand: "lt"})
+              %td= "#{dispenser.duration} Sec"
+              %td= number_to_currency(dispenser.amount)
+              %td
+                .d-flex
+                  = link_to edit_dispenser_path(dispenser), { 'data-controller': 'turbo', 'data-toggle': "modal", 'data-target': '#remote_modal', class: 'border border-primary px-1 rounded-3 mx-1', title: 'Add / Edit Dispenser', 'data-toggle': "tooltip", 'data-placement': "bottom" } do
+                    %i.bi.bi-pencil
+                  = button_to dispenser_path(dispenser), method: :delete, class: 'border border-danger px-1 rounded-3 mx-1', title: 'Delete', form: { data: { turbo_confirm: "Are you sure, You want to delete this dispenser?" } } do
+                    %i.bi.bi-trash-fill
+      = will_paginate @dispensers

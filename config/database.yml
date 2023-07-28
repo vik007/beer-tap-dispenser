@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  username: postgres
+  password: postgres
+  pool: 5
+
+development:
+  <<: *default
+  database: beer_tap_dispenser_development
+
+test:
+  <<: *default
+  database: beer_tap_dispenser_test
+
+production:
+  <<: *default
+  database: beer_tap_dispenser_production

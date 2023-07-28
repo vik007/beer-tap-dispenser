@@ -1,0 +1,24 @@
+# This is the configuration used to check the rubocop source code.
+
+require:
+  - rubocop/cop/internal_affairs
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'bin/**/*'
+    - 'test/*'
+    - 'test/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'Gemfile'
+    - 'config.ru'
+    - 'Rakefile'
+  TargetRubyVersion: 3.2
+  SuggestExtensions: false
+Style/Documentation:
+  Enabled: false

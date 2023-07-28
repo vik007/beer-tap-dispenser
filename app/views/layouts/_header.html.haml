@@ -1,0 +1,17 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    %a.navbar-brand{ href: "/"}
+      = image_tag 'logo.png', width: 60
+    %button.navbar-toggler{"aria-controls": "navbarNav", "aria-expanded": "false", "aria-label": "Toggle navigation", "data-bs-target": "#navbarNav", "data-bs-toggle": "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse.d-flex.justify-content-end
+      %ul.navbar-nav
+        %li.nav-item.d-block
+          - if admin_user_signed_in?
+            = button_to destroy_admin_user_session_path, class: 'btn btn-default', method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}} do
+              %i.bi.bi-power
+              Logout
+          - else
+            = link_to new_admin_user_session_path, class: 'btn btn-default' do
+              %i.bi.bi-person
+              Signin
